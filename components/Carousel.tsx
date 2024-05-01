@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import React, { useCallback, useEffect, useState } from 'react';
 
-import '../styles/carousel.scss';
+import '../styles/carousel.scss'
 
 interface CarouselProps {
     items: arr[];
@@ -60,7 +60,7 @@ const Carousel: React.FC<CarouselProps> = ({ items, autoSlide = false }) => {
         <>
             {
                 items[0]?.text ?
-                    <p className={'animate__slideInLeft'}>
+                    <p >
                         {arrElement.text}
                     </p>
                     : null

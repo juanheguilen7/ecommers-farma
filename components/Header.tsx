@@ -4,10 +4,12 @@ import Image from 'next/image';
 
 import '@/styles/header.scss';
 import Link from 'next/link';
+import SliderComponent from './Slider';
 
 const Header = () => {
   return (
     <>
+    <SliderComponent/>
       <header className='container-header'>
 
         <Link href={'/'}>

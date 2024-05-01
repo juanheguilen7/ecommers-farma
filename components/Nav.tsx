@@ -40,11 +40,6 @@ const NavBar = () => {
           </li>
           <li>
             <Link href={'/'}>
-              Skin Care
-            </Link>
-          </li>
-          <li>
-            <Link href={'/'}>
               Quienes Somos
             </Link>
           </li>

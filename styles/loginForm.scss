@@ -1,0 +1,86 @@
+.container-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+
+    .form-register {
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;    
+        width: 33rem;
+        padding: 2rem;
+        height: 23rem;
+        border-radius: 20px;
+        border: 2px solid grey;   
+
+        .box-inputs {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            text-align: start;
+            gap: 0.5rem;
+
+            .inputs-form{
+                width: auto;
+                height: 2rem;
+                border-radius: 5px;
+                border: 1px solid grey;
+            }
+        }
+
+        .box-buttons {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            justify-content: space-between;
+            
+            .btn-form {
+                width: 15rem;
+                height: 3rem;
+                margin-block: 0.5rem;
+                background: transparent;
+                border-radius:10px;
+                border: 1px solid grey;
+            }
+            .logIn{
+                background-color: #c0e88f;
+                cursor: pointer;
+            }
+            .logIn:hover{
+                background-color: transparent;
+            }
+            .cancel{
+                cursor: pointer;
+            }
+            .cancel:hover{
+                background-color:black ;
+                color: white;
+            }
+        }
+        .box-actions{
+            display: flex;
+            flex-direction: row;
+            width: auto;
+            justify-content: space-between;
+ 
+            .box-link{
+                display: flex;
+                flex-direction: column;
+                text-align: start;
+                width: max-content;
+                padding: 0.5rem;
+                a{
+
+                    color: black;
+                    font-weight: 600;
+                }
+                a:hover{
+                    color:  #c0e88f;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}

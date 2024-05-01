@@ -1,0 +1,42 @@
+.footer-container{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
+    width: auto;
+
+    .container-firstPart{
+        padding-inline: 5rem;
+        display: flex;
+        justify-content: space-around;
+
+        .container-redes{
+            display: flex;
+            justify-content: space-between;
+            align-self: center;
+            gap: 1rem;
+        }
+        .box-footer{
+            span{
+                padding: 0;
+                margin: 0;
+            }    
+            ul{
+                padding:0;
+                margin-left: 2rem;
+              text-align: start;
+            }
+        }
+    }
+    .container-secondPart{
+        background-color: grey;
+        display: flex;
+        justify-content: space-around;
+        color: white;
+        padding:0;
+        p{
+            width: 50%;
+        }
+    }
+}

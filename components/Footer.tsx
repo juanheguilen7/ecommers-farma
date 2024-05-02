@@ -7,20 +7,20 @@ const Footer = () => {
     <footer className='footer-container'>
       <div className='container-firstPart'>
         <div className='container-redes'>
-
-          <Link href='/'>
+          <Link href='https://www.facebook.com/fciaheguilen' target='_blank'>
             <Image src='/icons/facebook.svg' alt='icono de facebook' width={30} height={30} />
           </Link>
-          <Link href='/'>
+          <Link href='https://www.instagram.com/farmaciaheguilen/' target='_blank'>
             <Image src='/icons/instagram.svg' alt='icono de instagram' width={30} height={30} />
           </Link>
-          <Link href='/'>
+          <Link href='https://wa.link/qcrwvb' target='_blank'>
             <Image src='/icons/wp.svg' alt='icono de whatssap' width={30} height={30} />
           </Link>
         </div>
         <div className='box-footer'>
           <ul>
-          <span>Atencion al cliente</span>
+            <span className='footer-title'>Atencion al cliente
+            </span>
             <li>Contacto</li>
             <li>Medios de pago</li>
             <li>Como comprar</li>
@@ -31,9 +31,9 @@ const Footer = () => {
           </ul>
         </div>
         <div className='box-footer'>
-          
+
           <ul>
-          <span>Categorias</span>
+            <span className='footer-title'>Categorias</span>
             <li>
               Dermocosmetica
             </li>
@@ -56,7 +56,7 @@ const Footer = () => {
         </div>
         <div className='box-footer'>
           <ul>
-          <span>Conocenos</span>
+            <span className='footer-title'>Conocenos</span>
             <li>Nuestra empresa</li>
             <li>Mis pedidos</li>
             <li>Puntos de retiro</li>

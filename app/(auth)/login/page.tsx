@@ -1,23 +1,58 @@
-import Link from 'next/link';
-import React from 'react';
+'use client'
 
-import '../../../styles/loginForm.scss';
+import Link from 'next/link';
+import React, { useState } from 'react';
+
+import '@/styles/loginForm.scss';
+import { useRouter } from 'next/navigation';
 
 const Login = () => {
+
+  const route = useRouter();
+
+  const [user, setUser] = useState({ email: '', password: '' });
+  
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setUser({
+      ...user,
+      [name]: value
+    });
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch('/api/auth/log', {
+        method: 'POST',
+        body: JSON.stringify({ user })
+      });
+
+      if (res.ok) {
+        route.push('/')
+      } else {
+        alert('error en credenciales')
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <main className='container-form'>
-      <form className='form-register'>
+      <form className='form-register' onSubmit={handleSubmit}>
         <div className='box-inputs'>
-          <label htmlFor="">
+          <label htmlFor="email">
             Email
           </label>
-          <input type="text" className='inputs-form' />
+          <input type="text" name='email' className='inputs-form' onChange={handleChange} value={user.email} />
         </div>
         <div className='box-inputs'>
-          <label>
+          <label htmlFor='password'>
             Contraseña
           </label>
-          <input type="password" className='inputs-form' />
+          <input type="password" className='inputs-form' onChange={handleChange} name='password' value={user.password} />
         </div>
         <div className='box-buttons'>
           <button type="button" className='btn-form cancel'>Cancelar</button>

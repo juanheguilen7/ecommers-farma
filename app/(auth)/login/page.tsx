@@ -7,11 +7,10 @@ import '@/styles/loginForm.scss';
 import { useRouter } from 'next/navigation';
 
 const Login = () => {
-
   const route = useRouter();
 
   const [user, setUser] = useState({ email: '', password: '' });
-  
+
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setUser({
@@ -40,8 +39,8 @@ const Login = () => {
   };
 
   return (
-    <main className='container-form'>
-      <form className='form-register' onSubmit={handleSubmit}>
+    <main className='container'>
+      <form className='form-login' onSubmit={handleSubmit}>
         <div className='box-inputs'>
           <label htmlFor="email">
             Email

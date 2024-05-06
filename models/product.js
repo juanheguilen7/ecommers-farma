@@ -9,9 +9,19 @@ const ProductSchema = new Schema({
         type: Number,
         required: true,
     },
+    stock: {
+        type: Number,
+        required: true
+    },
     description: {
         type: String,
         kMaxLength: 40
+    },
+    image: {
+        type: String
+    },
+    offer:{
+        type:Number
     }
 })
 

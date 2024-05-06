@@ -1,11 +1,12 @@
 import React from 'react'
-import '../styles/advertisements.scss'
+import '@/styles/advertisements.scss'
 import Image from 'next/image';
 
 const Advertisements = () => {
     return (
         <section className='advertisements-grid'>
             <div className='card'>
+                
                 <div className='box-card'>
                     <Image src={'/icons/credit-card.svg'} alt='credit-card' width={80} height={80} />
                     <div>

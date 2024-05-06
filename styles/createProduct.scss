@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+
+    .form-product {
+        border: 2px solid grey;
+        border-radius: 10px;
+        width: fit-content;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 70%;
+        gap:1rem;
+
+        .box-input {
+            display: flex;
+            flex-direction: column;
+            text-align: start;
+            gap: 0.5rem;
+
+            .input-create {
+                width: auto;
+                height: 2rem;
+                border-radius: 5px;
+                border: 1px solid grey;
+            }
+        }
+
+        .btn-submit {
+            height: 3rem;
+            margin-block: 0.5rem;
+            border-radius: 10px;
+            border: 1px solid grey;
+            background-color: #c0e88f;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: transparent;
+        }
+    }
+}

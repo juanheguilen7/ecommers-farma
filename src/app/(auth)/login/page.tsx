@@ -25,11 +25,17 @@ const Login = () => {
     try {
       const res = await fetch('/api/auth/log', {
         method: 'POST',
-        body: JSON.stringify({ user })
+        body: JSON.stringify({ user }),
       });
 
       if (res.ok) {
-        route.push('/')
+        const data = await res.json();
+        const { _id, cart } = data; //filtro datos sensibles
+
+        // Guardar la información del usuario y del carrito en el estado local
+        localStorage.setItem('user', JSON.stringify({ _id, cart }));
+        route.push('/');
+
       } else {
         alert('error en credenciales')
       }

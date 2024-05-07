@@ -1,19 +1,23 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import '@/styles/navbar.scss';
+import '../styles/navbar.scss';
 import Image from 'next/image';
 
 const NavBar = () => {
   const [dropdown, setDropdown] = useState(false);
+
+
   const handleMouseEnter = () => {
     setDropdown(true);
   };
 
+
   const handleMouseLeave = () => {
     setDropdown(false);
   };
+
 
 
   return (
@@ -72,8 +76,8 @@ const NavBar = () => {
             </ul>
           </div>
           <div className='dropdown-resto'>
-              <p>asdsd</p>
-              <p>adasdasd</p>
+            <p>asdsd</p>
+            <p>adasdasd</p>
           </div>
         </div>
       )}

@@ -1,5 +1,5 @@
-import { connectionToDB } from '@/utils/database';
-import Product from '@/models/product.js';
+import { connectionToDB } from '../../../utils/database.js';
+import Product from '../../../models/product.js';
 
 //crea producto
 export const POST = async (req, res) => {

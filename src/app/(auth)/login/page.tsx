@@ -1,10 +1,10 @@
 'use client'
-
 import Link from 'next/link';
 import React, { useState } from 'react';
 
-import '@/styles/loginForm.scss';
-import { useRouter } from 'next/navigation';
+import '../../../styles/loginForm.scss';
+import { redirect, useRouter } from 'next/navigation';
+import { cookies } from 'next/headers';
 
 const Login = () => {
   const route = useRouter();
@@ -26,18 +26,18 @@ const Login = () => {
       const res = await fetch('/api/auth/log', {
         method: 'POST',
         body: JSON.stringify({ user }),
+        credentials: 'include',
       });
 
       if (res.ok) {
-        const data = await res.json();
-        const { _id, cart } = data; //filtro datos sensibles
+        const { _id, cart } = await res.json();
+        const idsUser: any = { [_id]: cart };
 
-        // Guardar la información del usuario y del carrito en el estado local
-        localStorage.setItem('user', JSON.stringify({ _id, cart }));
-        route.push('/');
-
+        localStorage.setItem('utils', JSON.stringify(idsUser));
+        route.push('/')
       } else {
-        alert('error en credenciales')
+        alert('credenciales incorrectas');
+
       }
     } catch (error) {
       console.log(error);

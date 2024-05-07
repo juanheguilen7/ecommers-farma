@@ -1,5 +1,5 @@
 import React from 'react'
-import '@/styles/advertisements.scss'
+import '../styles/advertisements.scss'
 import Image from 'next/image';
 
 const Advertisements = () => {

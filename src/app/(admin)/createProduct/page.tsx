@@ -2,7 +2,7 @@
 
 import React, { FormEvent, useState } from 'react'
 
-import '@/styles/createProduct.scss'
+import '../../../styles/createProduct.scss'
 
 const initialValues = {
     name: '',

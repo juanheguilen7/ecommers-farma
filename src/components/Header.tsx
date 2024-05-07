@@ -1,15 +1,39 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
 
-import '@/styles/header.scss';
+import '../styles/header.scss';
 import Link from 'next/link';
 import SliderComponent from './Slider';
 
 const Header = () => {
+  const [userData, setUserData] = useState(null);
+  const [localStorageUpdated, setLocalStorageUpdated] = useState(false);
+
+  useEffect(() => {
+    const dataUserIds = () => {
+      const data = localStorage.getItem('utils');
+      if (data) {
+        const parsedData = JSON.parse(data);
+        if (parsedData) {
+          setUserData(parsedData);
+        }
+      } else {
+        setUserData(null);
+      }
+    }
+    dataUserIds();
+  }, [localStorageUpdated]);
+
+
+  console.log(userData)
+  const handleMensage = () => {
+    return alert('Deberias loguear primero')
+  }
+
   return (
     <>
-    <SliderComponent/>
+      <SliderComponent />
       <header className='container-header'>
 
         <Link href={'/'}>
@@ -26,27 +50,53 @@ const Header = () => {
           </button>
         </div>
         <div className='acces-container'>
-          <Link href={'/'} className='container-btn'>
-            <Image src='/icons/boxes.svg' alt='svg de boxes'
-              width={25}
-              height={25} />
-            <p>Mis pedidos</p>
-          </Link>
 
-          <Link href='/profile' className='container-btn '>
-            <Image src='/icons/user.svg' alt='svg de usuario'
-              width={25}
-              height={25} />
-            <p>Mi cuenta</p>
-          </Link>
+          {userData ? <>
+            <Link href={'/'} className='container-btn'>
+              <Image src='/icons/boxes.svg' alt='svg de boxes'
+                width={25}
+                height={25} />
+              <p>Mis pedidos</p>
+            </Link>
+
+            <Link href='/profile' className='container-btn '>
+              <Image src='/icons/user.svg' alt='svg de usuario'
+                width={25}
+                height={25} />
+              <p>Mi cuenta</p>
+            </Link>
+          </>
+            :
+            <>
+              <div className='container-btn' onClick={handleMensage}>
+                <Image src='/icons/boxes.svg' alt='svg de boxes'
+                  width={25}
+                  height={25} />
+                <p>Mis pedidos</p>
+              </div>
+              <Link href='/login' className='container-btn '>
+                <Image src='/icons/user.svg' alt='svg de usuario'
+                  width={25}
+                  height={25} />
+                <p>Loguearse</p>
+              </Link>
+            </>}
+
           <div className='cart'>
-            <Link href={'/bookmark'} className='svg-cart'>
-              <Image src="/icons/heart.svg" alt='heart svg' width={25} height={25} />
-            </Link>
 
-            <Link href={'/cart'} className='svg-cart'>
-              <Image src="/icons/shopping-cart.svg" alt='cart svg' width={25} height={25} />
-            </Link>
+            {
+              userData ? <>
+                <Link href={'/bookmark'} className='svg-cart'>
+                  <Image src="/icons/heart.svg" alt='heart svg' width={25} height={25} />
+                </Link>
+                <Link href={`/cart/${Object.values(userData)}`} className='svg-cart'>
+                  <Image src="/icons/shopping-cart.svg" alt='cart svg' width={25} height={25} />
+                </Link>
+              </> : <>
+                <Image src="/icons/heart.svg" alt='heart svg' width={25} height={25} onClick={handleMensage} />
+                <Image src="/icons/shopping-cart.svg" alt='cart svg' width={25} height={25} onClick={handleMensage} />
+              </>
+            }
 
           </div>
         </div>

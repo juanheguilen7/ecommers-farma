@@ -1,6 +1,6 @@
-import { connectionToDB } from '@/utils/database';
-import User from '@/models/user.js';
-import Cart from '@/models/cart.js'
+import { connectionToDB } from '../../../utils/database.js';
+import User from '../../../models/user.js';
+import Cart from '../../../models/cart.js';
 
 export const POST = async (req, res) => {
     const { user } = await req.json();

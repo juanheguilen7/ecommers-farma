@@ -1,48 +1,40 @@
 'use client'
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import React, { useState } from 'react';
 
 import '../../../styles/loginForm.scss';
-import { redirect, useRouter } from 'next/navigation';
-import { cookies } from 'next/headers';
+import { useRouter } from 'next/navigation';
+
+
 
 const Login = () => {
-  const route = useRouter();
 
-  const [user, setUser] = useState({ email: '', password: '' });
+  const [errors, setErrors] = useState<string[]>([]);
+  const [email, setEmail] = useState<string>("pabloperez@hotmail.com");
+  const [password, setPassword] = useState<string>("123123");
+  const router = useRouter();
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setUser({
-      ...user,
-      [name]: value
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setErrors([]);
+
+    const res = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
     });
-  };
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-
-    try {
-      const res = await fetch('/api/auth/log', {
-        method: 'POST',
-        body: JSON.stringify({ user }),
-        credentials: 'include',
-      });
-
-      if (res.ok) {
-        const { _id, cart } = await res.json();
-        const idsUser: any = { [_id]: cart };
-
-        localStorage.setItem('utils', JSON.stringify(idsUser));
-        route.push('/')
-      } else {
-        alert('credenciales incorrectas');
-
-      }
-    } catch (error) {
-      console.log(error);
+    console.log(res);
+    if (res?.error) {
+      alert(res.error);
+    } else {
+      router.push('/');
+      router.refresh();
     }
   };
+
+
+
 
   return (
     <main className='container'>
@@ -51,13 +43,27 @@ const Login = () => {
           <label htmlFor="email">
             Email
           </label>
-          <input type="text" name='email' className='inputs-form' onChange={handleChange} value={user.email} />
+          <input
+            type="email"
+            placeholder="test@test.com"
+            name="email"
+            className='inputs-form'
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
         </div>
         <div className='box-inputs'>
           <label htmlFor='password'>
             Contraseña
           </label>
-          <input type="password" className='inputs-form' onChange={handleChange} name='password' value={user.password} />
+          <input
+            type="password"
+            placeholder="123123"
+            name="password"
+            className='inputs-form'
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
         </div>
         <div className='box-buttons'>
           <button type="button" className='btn-form cancel'>Cancelar</button>

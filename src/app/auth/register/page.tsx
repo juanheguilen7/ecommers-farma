@@ -32,30 +32,33 @@ const Register = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
+    console.log(formData);
+
     if (formData.password !== formData.confirm_password) {
       setErrors({
         passwordMismatch: true
       });
       return;
     }
-    const data = {
-      user: {
-        username: formData.name,
-        lastname: formData.lastname,
-        password: formData.password,
-        email: formData.email,
-       
-      }
+
+    const user = {
+      username: formData.name,
+      lastname: formData.lastname,
+      email: formData.email,
+      password: formData.password
     }
 
     try {
-      const res = await fetch('/api/create-user', {
+      const res = await fetch('/api/auth/register', {
         method: 'POST',
-        body: JSON.stringify(data)
+        body: JSON.stringify({ user })
       });
-
+      console.log(res);
       if (res.ok) {
-        router.push('/login');
+        router.push('/auth/login');
+      }
+      if (res.status === 400) {
+        alert('el usuario ya existe');
       }
     } catch (error) {
       console.log(error);

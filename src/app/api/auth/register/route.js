@@ -7,7 +7,6 @@ import bcrypt from 'bcrypt';
 export const POST = async (req, res) => {
     const { user } = await req.json();
 
-
     try {
         await connectionToDB();
         //USER EXIST?
@@ -26,7 +25,7 @@ export const POST = async (req, res) => {
             email: user.email,
             rol: 'user',
         });
-        
+
         await newUser.save();
 
         //CREAT CART FOR USER

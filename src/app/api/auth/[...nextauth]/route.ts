@@ -4,7 +4,11 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import User from "@/src/models/user";
 import { connectionToDB } from '../../../../utils/database.js';
 
-export const authOptions = {
+import bcrypt from 'bcrypt';
+import { cookies } from "next/headers.js";
+
+
+export const authOptions: any = {
     providers: [
         CredentialsProvider({
             name: "Credentials",
@@ -18,10 +22,19 @@ export const authOptions = {
                 const userFound = await User.findOne({ email: credentials?.email });
                 if (!userFound) throw new Error('No user Found');
 
+                if (credentials && credentials.password) {
+                    const matchPassword = await bcrypt.compare(credentials.password, userFound.password);
+                    if (!matchPassword) throw new Error('Wrong password')
+                }
+                if (userFound.rol === 'admin') {
+                    cookies().set('auth', 'ready')
+                }
                 return {
-                    id: userFound._id,
                     name: userFound.username,
-                    email: userFound.email
+                    email: userFound.email,
+                    cart: userFound.cart,
+                    id: userFound._id,
+                    rol: userFound.rol
                 }
 
             }
@@ -29,6 +42,26 @@ export const authOptions = {
     ],
     pages: {
         signIn: "auth/login",
+    },
+    callbacks: {
+        async jwt({ token, user, account, profile, isNewUser }: any) {
+            if (user) {
+                token.id = user._id,
+                    token.cart = user.cart,
+                    token.rol = user.rol,
+                    token.id = user.id,
+                    token.rol = user.rol
+            }
+            return token;
+        },
+        async session({ session, token, user }: any) {
+            // Send properties to the client, like an access_token and user id from a provider.
+            session.user.id = token.id
+            session.user.cart = token.cart
+            session.user.rol = token.rol
+
+            return session
+        }
     }
 }
 

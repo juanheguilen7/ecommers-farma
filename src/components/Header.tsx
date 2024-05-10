@@ -7,11 +7,24 @@ import { authOptions } from '../app/api/auth/[...nextauth]/route';
 
 import '../styles/header.scss';
 import SliderComponent from './Slider';
+import LogOut from './LogOut';
+import { cookies } from 'next/headers';
+
+
+interface Session {
+  user?: {
+    name?: string;
+    email?: string;
+    image?: string;
+    id?: string;
+    cart?: string;
+    rol?: string;
+  };
+  // Agrega otros campos de sesión si los necesitas
+}
 
 const Header = async () => {
-  const session = await getServerSession(authOptions);
-
-  console.log(session?.user);
+  const session: any = await getServerSession(authOptions);
   return (
     <>
       <SliderComponent />
@@ -28,7 +41,7 @@ const Header = async () => {
             <Image src="/icons/search.svg" alt='icon de busqueda' width={30} height={30} />
           </button>
         </div>
-        {session?.user ?
+        {session ?
           <>
             <div className='acces-container'>
               <Link href={'/'} className='container-btn'>
@@ -37,21 +50,22 @@ const Header = async () => {
                   height={25} />
                 <p>Mis pedidos</p>
               </Link>
-              <Link href='/profile' className='container-btn '>
+              <Link href={`/profile/${session.user.id}`} className='container-btn '>
                 <Image src='/icons/user.svg' alt='svg de usuario'
                   width={25}
                   height={25} />
-                <p>Mi cuenta</p>
+                <p>Hola!: {session.user.name}</p>
               </Link>
               <div className='cart'>
                 <Link href={'/bookmark'} className='svg-cart'>
                   <Image src="/icons/heart.svg" alt='heart svg' width={25} height={25} />
                 </Link>
-                <Link href={`/cart`} className='svg-cart'>
+                <Link href={`/cart/${session.user.cart}`} className='svg-cart'>
                   <Image src="/icons/shopping-cart.svg" alt='cart svg' width={25} height={25} />
                 </Link>
               </div>
             </div>
+            <LogOut />
           </>
           :
           <>
@@ -77,11 +91,11 @@ const Header = async () => {
                 </Link>
               </div>
             </div>
-
           </>
         }
 
       </header>
+
     </>
   )
 }

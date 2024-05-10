@@ -1,0 +1,86 @@
+.container-showProduct {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    height: 100vh;
+    color: black;
+}
+
+.box-showProduct {
+    display: flex;
+    align-items: center;
+    width: 75vw;
+    max-width: 650px;
+    padding: 50px 30px 50px 20px;
+    background: white;
+    border-radius: 24px;
+   
+
+    .img-showProduct {
+        max-width: 280px;
+        width: 32vw;
+        height: 270px;
+        object-fit: cover;
+        margin-left: -60px;
+        margin-right: 40px;
+        border-radius: inherit;
+    }
+    .data-showProduct{
+
+        h2,
+        h3 {
+            font-weight: 400;
+        }
+    
+        h3,
+        label {
+            opacity: 0.5;
+        }
+    
+        h2 {
+            font-size: 28px;
+            margin: 0;
+        }
+    
+        h3 {
+            font-size: 16px;
+            margin: 0 0 20px;
+        }
+        .stats {
+            display: block;
+            font-style: normal;
+            font-size: 26px;
+        }
+    }
+
+    .buttons {
+        display: inline-flex;
+        gap: 10px;
+
+        button {
+            border: 1px solid grey;
+            background: transparent;
+            color: black;
+            font-family: inherit;
+            padding: 16px 20px;
+            font-size: 18px;
+            border-radius: 6px;
+            min-width: 120px;
+        }
+
+        .primary {
+            background: blue;
+            color: white;
+            border: 0;
+        }
+    }
+
+   
+}
+
+@media (width <=720px) {
+    .card {
+        margin: 0 40px;
+    }
+}

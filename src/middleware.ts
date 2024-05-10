@@ -1,6 +1,6 @@
-export { default } from 'next-auth/middleware'; //corrobora que exista la session
+import {stackMiddlewares} from "../src/middlewares/stackHandler";
+import { withUser} from "../src/middlewares/withUser";
 
-export const config = {
-    matcher: ["/cart/:path*", "/bookmark/:path*", "/profile/:path*", "/createProduct/:path*", "/showProduct"]
-}
+const middlewares = [withUser];
+export default stackMiddlewares(middlewares);
 

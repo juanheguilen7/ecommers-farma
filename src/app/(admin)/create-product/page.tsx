@@ -1,20 +1,23 @@
 'use client'
 
-import React, { FormEvent, useState } from 'react'
+import React, { useState } from 'react'
 
 import '../../../styles/createProduct.scss'
+import { fileToBase64 } from '@/src/utils/fileManage'
 
 const initialValues = {
     name: '',
     price: 0,
     stock: 0,
     description: '',
-    image: '',
+    image: null as string | null,
+    category: 'otros',
     offer: 0
 }
 const CreateProduct = () => {
     const [formData, setFormData] = useState(initialValues);
     const [offer, setOffer] = useState(false);
+    const [image, setImage] = useState('');
 
     const handleChange = (event: any) => {
         const { name, value } = event.target;
@@ -23,11 +26,24 @@ const CreateProduct = () => {
             [name]: value
         })
     }
+    const handleImageChange = async (event: any) => { // Nueva función para manejar el cambio de imagen
+        const file = event.target.files[0]; // Obtenemos el archivo seleccionado
+        const base64ImageRecord = await fileToBase64(file);
+        setImage(base64ImageRecord);
+    }
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         try {
-            const product = formData;
+            const product = {
+                name: formData.name,
+                price: formData.price,
+                stock: formData.stock,
+                description: formData.description,
+                image: image, // No necesitas convertirlo aquí, ya está en base64
+                offer: formData.offer,
+                category: formData.category
+            };
             const res = await fetch('/api/product', {
                 method: 'POST',
                 body: JSON.stringify({ product })
@@ -43,7 +59,7 @@ const CreateProduct = () => {
     }
     return (
         <div className='container'>
-            <form className='form-product' onSubmit={handleSubmit}>
+            <form className='form-product' onSubmit={handleSubmit} >
                 <div className='box-input'>
                     <label htmlFor="name">
                         Nombre
@@ -72,7 +88,20 @@ const CreateProduct = () => {
                     <label htmlFor="image">
                         Cargar imagen
                     </label>
-                    <input type='file' name='image' onChange={handleChange} value={formData.image} />
+                    <input type='file' name='image' onChange={handleImageChange} />
+                </div>
+                <div className='box-input'>
+                    <label htmlFor="category">
+                        Selecciona la categoria
+                    </label>
+                    <select name="category" id="category" >
+                        <option value="cosmetica">Cosmetica</option>
+                        <option value="perfumes">Perfumes</option>
+                        <option value="cremas">Cremas</option>
+                        <option value="saludBucal">Salud bucal</option>
+                        <option value="Otros">otros</option>
+                    </select>
+
                 </div>
                 <div>
                     <label htmlFor="checkOffer">

@@ -17,7 +17,7 @@ export const POST = async (req, res) => {
 };
 
 //llamar productoss
-export const GET = async () => {
+export const GET = async (req, res) => {
     try {
         await connectionToDB()
         const arrProduct = await Product.find();
@@ -31,14 +31,13 @@ export const GET = async () => {
 };
 
 //llamar producto por ID
-export const GETBYID = async (req, res) => {
-    const { productId } = await req.json();
+export const GETBYID = async (id) => {
 
     try {
         await connectionToDB();
-        const productById = await Product.findById(productId);
-
-        return Response(JSON.stringify(productById), { status: 200 })
+        const productById = await Product.findById(id);
+        console.log(productById);
+        return res.status(200).json(productById);
     } catch (error) {
         console.log(error);
         return new Response({ status: 500 })

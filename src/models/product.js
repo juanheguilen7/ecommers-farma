@@ -20,8 +20,12 @@ const ProductSchema = new Schema({
     image: {
         type: String
     },
-    offer:{
-        type:Number
+    offer: {
+        type: Number
+    },
+    category: {
+        type: String,
+        required: [true, 'Category required']
     }
 })
 

@@ -1,24 +1,9 @@
-'use client'
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import '@/styles/navbar.scss';
-import Image from 'next/image';
 
 const NavBar = () => {
-  const [dropdown, setDropdown] = useState(false);
-
-
-  const handleMouseEnter = () => {
-    setDropdown(true);
-  };
-
-
-  const handleMouseLeave = () => {
-    setDropdown(false);
-  };
-
-
 
   return (
     <>

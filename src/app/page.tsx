@@ -1,7 +1,8 @@
-import Advertisements from "../components/Advertisements";
-import NavBar from "../components/Nav";
-import Offers from "../components/Offers";
-import BannerSlide from "../components/banner/BannerSlide";
+import AllProducts from "@/components/AllProducts";
+import Advertisements from "@/components/Advertisements";
+import NavBar from "@/components/Nav";
+import Offers from "@/components/Offers";
+import BannerSlide from "@/components/banner/BannerSlide";
 
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
         <BannerSlide/>
         <Advertisements/>
         <Offers />
+        <AllProducts/>
        </main>
     </>
    

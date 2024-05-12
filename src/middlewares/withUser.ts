@@ -1,9 +1,6 @@
 import { NextFetchEvent, NextMiddleware, NextRequest, NextResponse } from "next/server";
 export type MiddlewareFactory = (middleware: NextMiddleware) => NextMiddleware;
 
-function getSearchParam(param: string, url: any) {
-    return url.searchParams.get(param);
-}
 
 export const withUser: MiddlewareFactory = (next) => {
     return async (request: NextRequest, _next: NextFetchEvent) => {

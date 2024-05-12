@@ -1,5 +1,5 @@
-import { connectionToDB } from '../../../utils/database.js';
-import Product from '../../../models/product.js';
+import { connectionToDB } from '@/utils/database.js';
+import Product from '@/models/product.js';
 
 //crea producto
 export const POST = async (req, res) => {
@@ -16,23 +16,47 @@ export const POST = async (req, res) => {
     }
 };
 
-//llamar productoss
-export const GET = async (req, res) => {
+
+//modificar producto
+export const PATCH = async () => {
+
     try {
-        await connectionToDB()
-        const arrProduct = await Product.find();
-
-        return new Response(JSON.stringify(arrProduct), { status: 200 })
+        await connectionToDB();
     } catch (error) {
-        console.log(error)
-
-        return new Response({ status: 500 });
+        console.log(error);
     }
 };
 
-//llamar producto por ID
-export const GETBYID = async (id) => {
+export async function GET(request, { params }) {
+    try {
+        const { slug } = params;
 
+        await connectionToDB();
+        const arrProduct = await Product.find();
+
+        switch (slug) {
+            case 'offer':
+                const arrProductFilter = arrProduct.filter((product) => {
+                    if (product.offer !== 0) {
+                        return product
+                    }
+                })
+                return new Response(JSON.stringify({ arrProductFilter }), { status: 200 });
+            case 'all':
+                return new Response(JSON.stringify({ arrProduct }), { status: 200 });
+        }
+
+    } catch (error) {
+        console.error(error);
+        return new Response(JSON.stringify({ status: 500 }));
+    }
+}
+
+
+/* 
+//llamar producto por ID
+export const GET = async (req, res) => {
+    console.log(params)
     try {
         await connectionToDB();
         const productById = await Product.findById(id);
@@ -44,10 +68,8 @@ export const GETBYID = async (id) => {
     }
 };
 
-
 //eliminar producto
 export const DELETE = async (req, res) => {
-    const { productId } = await req.json();
 
     try {
         await connectionToDB();
@@ -60,14 +82,4 @@ export const DELETE = async (req, res) => {
 
     }
 };
-
-
-//modificar producto
-export const PATCH = async () => {
-    
-    try {
-        await connectionToDB();
-    } catch (error) {
-        console.log(error);
-    }
-};
+ */

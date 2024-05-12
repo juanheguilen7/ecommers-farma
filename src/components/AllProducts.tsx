@@ -1,11 +1,10 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import ProductCard from './ProductCard';
 import { base64ToFile } from '@/utils/fileManage';
 
-import '@/styles/offers.scss'
-
-const Offers = () => {
+import '@/styles/allProduct.scss';
+const AllProducts = () => {
     const [arrProduct, setArrProduct] = useState<any[]>([]);
     const [arrFinally, setArrFinally] = useState<any[]>([]);
 
@@ -13,10 +12,10 @@ const Offers = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const slug = 'offer';
+                const slug = 'all';
                 const res = await fetch(`/api/product/${slug}`, { method: 'GET' });
                 const dataProduct = await res.json();
-                setArrProduct(dataProduct.arrProductFilter);
+                setArrProduct(dataProduct.arrProduct);
             } catch (error) {
                 console.error(error);
             }
@@ -41,17 +40,17 @@ const Offers = () => {
             arrProduct.forEach(product => URL.revokeObjectURL(product.imageUrl));
         };
     }, [arrProduct]);
-
+    
     return (
-        <section className='offers-section'>
+        <section className='allProducts-section'>
             <div>
-                <h2>Ofertas del mes</h2>
+                <h2>Todos los productos</h2>
             </div>
-            <div className='offers-container'>
+            <div className='box-products'>
                 <ProductCard products={arrFinally} />
             </div>
         </section>
-    );
-};
+    )
+}
 
-export default Offers;
+export default AllProducts

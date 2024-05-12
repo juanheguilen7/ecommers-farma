@@ -26,7 +26,7 @@ export const base64ToFile = (base64String: any, filename: any) => {
     return new File([blob], filename);
 };
 
-export default  function bytesToKilobytes(bytes: number): number {
+export default function bytesToKilobytes(bytes: number): number {
     const kilobytes = bytes / 1024;
     return Math.round(kilobytes);
-  }
+}

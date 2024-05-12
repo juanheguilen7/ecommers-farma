@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react'
 
-import '../../../styles/createProduct.scss'
-import { fileToBase64 } from '@/src/utils/fileManage'
+import "@/styles/createProduct.scss"
+import { fileToBase64 } from '@/utils/fileManage'
 
 const initialValues = {
     name: '',

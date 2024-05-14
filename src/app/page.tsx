@@ -1,6 +1,6 @@
-import AllProducts from "@/components/AllProducts";
-import Advertisements from "@/components/Advertisements";
-import Offers from "@/components/Offers";
+import AllProducts from "@/components/AllProducts/AllProducts";
+import Advertisements from "@/components/Advertisements/Advertisements";
+import Offers from "@/components/Offer/Offers";
 import BannerSlide from "@/components/banner/BannerSlide";
 
 

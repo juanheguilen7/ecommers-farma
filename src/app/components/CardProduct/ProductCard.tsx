@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React from 'react'
 
 /* STYLE */
-import '@/styles/productCard.scss';
+import './productCard.scss';
 
 interface ProductCardProps {
   products: Product[];

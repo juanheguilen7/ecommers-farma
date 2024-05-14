@@ -1,10 +1,10 @@
 import React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "@/styles/main.scss";
-import Footer from "../components/Footer";
+import "./layout.scss";
+import Footer from "../components/Footer/Footer";
 import SessionAuthProvider from "@/context/SessionAuthProvider";
-import SliderComponent from "@/components/Slider";
+import SliderComponent from "@/components/Slider/Slider";
 import Header from "@/components/Header/Header";
 
 const inter = Inter({ subsets: ["latin"] });

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
-import '../styles/footer.scss'
+import './footer.scss'
 const Footer = () => {
   return (
     <footer className='footer-container'>

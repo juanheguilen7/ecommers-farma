@@ -1,7 +1,7 @@
 import React from 'react'
 
-import '../styles/slider.scss'
-import Carousel from './Carousel';
+import './slider.scss'
+import Carousel from '../Carrousel/Carousel';
 
 const SliderComponent = () => {
 

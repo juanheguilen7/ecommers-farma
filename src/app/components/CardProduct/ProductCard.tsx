@@ -10,40 +10,62 @@ interface ProductCardProps {
 }
 
 type Product = {
+  [x: string]: any;
   img: string;
   imageUrl: string;
-  title: string;
-  desc: string;
+  name: string;
+  description: string;
   price: number;
-  offer?: string;
+  offer?: number;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
+  const handleCalculate = (price: any, offer: any) => {
+    return price - (price * (offer / 100));
+  };
+
 
   return (
     <>
       {products && products.length !== 0 ? products.map((item, index) => {
+        const priceOffer = item.offer && item.offer !== 0 ? handleCalculate(item.price, item.offer) : null;
         return (
-          <div key={index} className='product-box'>
-            <div className='visual-box'>
-              <Image src={`${item.imageUrl}`} alt='imagen producto' width={150} height={150} />
-              <button className='btnAddToList' onClick={() => { }}>
-                <Image src={'/icons/heart.svg'} alt='svg corazon guardar carrito' width={25} height={25} />
-              </button>
+          <div key={index} className='productBox'>
+            <div className='productImage'>
+              <Image src={item.imageUrl} alt={`image-product${item.title}`} width={200} height={200} />
             </div>
-            <div className='info-box'>
-              <span>{item.title}</span>
-              <p>{item.desc}</p>
+            <div className='productText'>
+              <h4>{item.name}</h4>
+              <p>{item.description}</p>
             </div>
-            <div className='price-box'>
-              <span>${item.price}</span>
-              <p>{item.offer}</p>
+            <div className='productBoxAction'>
+              {item.offer && item.offer !== 0 ?
+                <div className='productPriceOffer'>
+                  <span className='productPriceOld'>
+                    ${item.price}
+                  </span>
+                  <span className='productPrice'>
+                    ${priceOffer}
+                  </span>
+                </div>
+                :
+                <span className='productPrice'>
+                  ${item.price}
+                </span>
+              }
+              <div className='productAction'>
+                <button>
+                  <Image src={'/icons/heart.svg'} alt='iconHeart' width={20} height={20} />
+                </button>
+                <button>
+                  <Image src={'/icons/copi.svg'} alt='iconCopie' width={20} height={20} />
+                </button>
+                <button>
+                  <Image src={'/icons/shopping-cart.svg'} alt='iconCart' width={20} height={20} />
+                </button>
+              </div>
             </div>
-            <button type='submit' className='btnAddToCart'>
-              <Image src={'/icons/shopping-cart.svg'} width={20} height={20} alt='svg carrito' />
-              <span>Agregar</span>
-            </button>
-          </div>
+          </div >
         )
       }) : null}
     </>

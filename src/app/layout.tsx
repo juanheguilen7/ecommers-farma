@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import "./layout.scss";
 import SessionAuthProvider from "@/context/SessionAuthProvider";
 import Footer from "./components/Footer/Footer";
-import SliderComponent from "./components/Slider/Slider";
+import SliderComponent from "./components/Header/Slider/Slider";
 import Header from "./components/Header/Header";
 
 
@@ -25,7 +25,6 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <SessionAuthProvider>
-          <SliderComponent />
           <Header/>
           {children}
           <Footer />

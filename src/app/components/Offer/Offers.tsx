@@ -4,6 +4,7 @@ import ProductCard from '../CardProduct/ProductCard';
 import { base64ToFile } from '@/utils/fileManage';
 
 import './offers.scss'
+import Watch from './Timer/Timer';
 
 const Offers = () => {
     const [arrProduct, setArrProduct] = useState<any[]>([]);
@@ -42,13 +43,18 @@ const Offers = () => {
         };
     }, [arrProduct]);
 
+
     return (
-        <section className='offers-section'>
+        <section className='offerSection'>
             <div>
                 <h2>Ofertas del mes</h2>
             </div>
-            <div className='offers-container'>
+            <div className='offerContainer'>
+            <Watch/>
+            <div className='offerBox'>
                 <ProductCard products={arrFinally} />
+            </div>
+            
             </div>
         </section>
     );

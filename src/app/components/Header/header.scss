@@ -1,28 +1,67 @@
-.headerContent{
-    display: flex;
-    flex-direction: row;
-    justify-content:space-between;
+.boxHeader {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
     padding: 0 5rem;
-    height: 5rem;
-    align-items: center;
+    background-color: #fff;
 
-}
-.headerLogo{
-    padding-top: 1rem;
-}
+    .containerLogo {
+        max-width: max-content;
 
-.headerNav{
-    padding: 0;
-    ul{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 0;
-        li{
-            margin: 1rem;
+        .boxLogoHeader {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            font-style: oblique;
+
+            h1 {
+                font-size: 20px;
+            }
         }
     }
-}
-.headerAction{
-    width: 150px;
+
+    .navHeader {
+        align-self: center;
+
+        .listHeader {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+
+            .btnHeader {
+                font-size: 15px;
+                font-weight: 500;
+                cursor: pointer
+            }
+
+            .btnHeader:hover {
+                transition: 0.3s;
+                opacity: 0.8;
+                border-bottom: 2px solid black;
+            }
+        }
+    }
+
+    .actionHeader {
+        align-self: center;
+        display: flex;
+        flex-direction: row;
+
+        align-items: center;
+
+        a {
+            display: flex;
+            align-items: center;
+        }
+
+        a:hover {
+            transition: 0.3s;
+            opacity: 0.8;
+
+            img {
+                transform: scale(1.1);
+            }
+
+        }
+    }
 }

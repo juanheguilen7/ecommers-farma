@@ -4,10 +4,20 @@ import ProductCard from '../CardProduct/ProductCard';
 import { base64ToFile } from '@/utils/fileManage';
 
 import './allProduct.scss';
+import { useSession } from 'next-auth/react';
 const AllProducts = () => {
     const [arrProduct, setArrProduct] = useState<any[]>([]);
     const [arrFinally, setArrFinally] = useState<any[]>([]);
 
+    const { data: session, status }: any = useSession()
+    let userData = {}
+    
+    if (session?.user) {
+        userData = {
+            id: session.user.id,
+            cart: session.user.cart
+        }
+    }
     // Paso 1: Cargar los productos
     useEffect(() => {
         const fetchData = async () => {
@@ -47,7 +57,7 @@ const AllProducts = () => {
                 <h2>Todos los productos</h2>
             </div>
             <div className='box-products'>
-                <ProductCard products={arrFinally} />
+                <ProductCard products={arrFinally} user={userData} />
             </div>
         </section>
     )

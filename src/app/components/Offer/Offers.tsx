@@ -5,10 +5,22 @@ import { base64ToFile } from '@/utils/fileManage';
 
 import './offers.scss'
 import Watch from './Timer/Timer';
+import { useSession } from 'next-auth/react';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 const Offers = () => {
     const [arrProduct, setArrProduct] = useState<any[]>([]);
     const [arrFinally, setArrFinally] = useState<any[]>([]);
+
+    const { data: session, status }: any = useSession()
+    let userData = {}
+    
+    if (session?.user) {
+        userData = {
+            id: session.user.id,
+            cart: session.user.cart
+        }
+    }
 
     // Paso 1: Cargar los productos
     useEffect(() => {
@@ -50,11 +62,11 @@ const Offers = () => {
                 <h2>Ofertas del mes</h2>
             </div>
             <div className='offerContainer'>
-            <Watch/>
-            <div className='offerBox'>
-                <ProductCard products={arrFinally} />
-            </div>
-            
+                <Watch />
+                <div className='offerBox'>
+                    <ProductCard products={arrFinally} user={userData} />
+                </div>
+
             </div>
         </section>
     );

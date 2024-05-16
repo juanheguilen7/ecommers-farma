@@ -94,6 +94,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, user }) => {
      // Manejar errores de red u otros errores no controlados
    } */
   return (
+
+    
     <>
       {products && products.length !== 0 ? products.map((item, index) => {
         const priceOffer = item.offer && item.offer !== 0 ? handleCalculate(item.price, item.offer) : null;

@@ -7,6 +7,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Action from './SessionAction/Action';
 import Button from '@mui/material/Button';
 import SliderComponent from './Slider/Slider';
+import CartIcon from './CartIcon/CartIcon';
 
 type userSession = {
     user: {
@@ -47,7 +48,7 @@ const Header = async () => {
 
                     <Button>
                         <Link href={session && session.user.rol !== 'admin' ? `/cart/${session.user.cart}` : '/auth/login'}>
-                            <Image src={'/icons/shopping-cart.svg'} width={25} height={25} alt='iconCart' />
+                            <CartIcon/>
                         </Link>
                     </Button>
                     {session ?

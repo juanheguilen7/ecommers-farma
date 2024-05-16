@@ -1,14 +1,10 @@
 import React from "react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./layout.scss";
 import SessionAuthProvider from "@/context/SessionAuthProvider";
 import Footer from "./components/Footer/Footer";
-import SliderComponent from "./components/Header/Slider/Slider";
 import Header from "./components/Header/Header";
-
-
-const inter = Inter({ subsets: ["latin"] });
+import { CartProvider } from "@/context/CartContext";
 
 export const metadata: Metadata = {
   title: "Farmacia Heguilen",
@@ -25,9 +21,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <SessionAuthProvider>
-          <Header/>
-          {children}
-          <Footer />
+          <CartProvider>
+            <Header />
+            {children}
+            <Footer />
+          </CartProvider>
         </SessionAuthProvider>
       </body>
     </html>

@@ -1,5 +1,4 @@
 import React from 'react'
-
 import './slider.scss'
 import Carousel from '../../Carrousel/Carousel'
 

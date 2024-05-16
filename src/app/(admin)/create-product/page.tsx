@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useState } from 'react'
-
-import "@/styles/createProduct.scss"
-import { fileToBase64 } from '@/utils/fileManage'
+import "./createProduct.scss"
+import { fileToBase64 } from '@/utils/fileManage';
+import Swal from 'sweetalert2'
 
 const initialValues = {
     name: '',
@@ -44,14 +44,14 @@ const CreateProduct = () => {
                 offer: formData.offer,
                 category: formData.category
             };
-            const res = await fetch('/api/product', {
+            const res = await fetch(`/api/createProduct/`, {
                 method: 'POST',
                 body: JSON.stringify({ product })
             });
+            console.log(res);
             if (res.ok) {
                 setFormData(initialValues);
-                alert('El producto fue creado correctamente');
-
+                Swal.fire('Producto cargado exitosamente.')
             }
         } catch (error) {
             console.log(error);

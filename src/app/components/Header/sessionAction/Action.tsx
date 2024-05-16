@@ -11,7 +11,6 @@ import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
-import Stack from '@mui/material/Stack';
 import Link from 'next/link';
 
 const Action = ({ id, rol }: any) => {
@@ -19,6 +18,8 @@ const Action = ({ id, rol }: any) => {
     const anchorRef = useRef<HTMLButtonElement>(null);
 
     const handleLogout = async () => {
+        //Eliminar el localStorage
+        localStorage.clear();
         // Eliminar la cookie de roles
         destroyCookie(null, 'auth');
         // Realizar el logout con NextAuth
@@ -60,8 +61,6 @@ const Action = ({ id, rol }: any) => {
 
     return (
         <>
-
-
             <Button
                 ref={anchorRef}
                 id="composition-button"

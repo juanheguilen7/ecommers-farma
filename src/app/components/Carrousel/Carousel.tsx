@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import React, { useCallback, useEffect, useState } from 'react';
 
-import '../styles/carousel.scss'
+import './carousel.scss'
 
 interface CarouselProps {
     items: arr[];

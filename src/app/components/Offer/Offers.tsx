@@ -1,21 +1,35 @@
 'use client'
-import React, { useEffect, useState } from 'react'
-import ProductCard from './ProductCard';
+import React, { useEffect, useState } from 'react';
+import ProductCard from '../CardProduct/ProductCard';
 import { base64ToFile } from '@/utils/fileManage';
 
-import '@/styles/allProduct.scss';
-const AllProducts = () => {
+import './offers.scss'
+import Watch from './Timer/Timer';
+import { useSession } from 'next-auth/react';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+
+const Offers = () => {
     const [arrProduct, setArrProduct] = useState<any[]>([]);
     const [arrFinally, setArrFinally] = useState<any[]>([]);
+
+    const { data: session, status }: any = useSession()
+    let userData = {}
+    
+    if (session?.user) {
+        userData = {
+            id: session.user.id,
+            cart: session.user.cart
+        }
+    }
 
     // Paso 1: Cargar los productos
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const slug = 'all';
+                const slug = 'offer';
                 const res = await fetch(`/api/product/${slug}`, { method: 'GET' });
                 const dataProduct = await res.json();
-                setArrProduct(dataProduct.arrProduct);
+                setArrProduct(dataProduct.arrProductFilter);
             } catch (error) {
                 console.error(error);
             }
@@ -40,17 +54,22 @@ const AllProducts = () => {
             arrProduct.forEach(product => URL.revokeObjectURL(product.imageUrl));
         };
     }, [arrProduct]);
-    
+
+
     return (
-        <section className='allProducts-section'>
+        <section className='offerSection'>
             <div>
-                <h2>Todos los productos</h2>
+                <h2>Ofertas del mes</h2>
             </div>
-            <div className='box-products'>
-                <ProductCard products={arrFinally} />
+            <div className='offerContainer'>
+                <Watch />
+                <div className='offerBox'>
+                    <ProductCard products={arrFinally} user={userData} />
+                </div>
+
             </div>
         </section>
-    )
-}
+    );
+};
 
-export default AllProducts
+export default Offers;

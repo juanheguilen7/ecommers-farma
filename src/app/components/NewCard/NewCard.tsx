@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-import '../styles/newcard.scss';
+import './newcard.scss';
 
 const NewCard = () => {
 

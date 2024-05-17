@@ -12,8 +12,7 @@ interface ProductCardProps {
 
 interface Product {
   category: string;
-  img: string;
-  imageUrl: string;
+  image: string;
   name: string;
   description: string;
   stock: number;
@@ -30,7 +29,7 @@ interface Cart {
 
 const ProductCard: React.FC<ProductCardProps> = ({ products, user }) => {
 
-  const [dataUser, setDataUser] = useState<DataUser | undefined>();
+  const [dataUser, setDataUser] = useState<any | undefined>();
   const cartContext = useContext(CartContext);
 
   if (!cartContext) {
@@ -53,7 +52,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, user }) => {
       name: item.name,
       price: item.price,
       cantidad: 1,
-      imageUrl: item.imageUrl,
+      image: item.image,
       category: item.category,
       offer:item.offer,
       stock:item.stock
@@ -103,7 +102,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, user }) => {
         return (
           <div key={index} className='productBox'>
             <div className='productImage'>
-              <Image src={item.imageUrl} alt={`image-product${item.name}`} width={200} height={200} />
+              <Image src={item.image} alt={`image-product${item.name}`} width={200} height={200} />
             </div>
             <div className='productText'>
               <h4>{item.name}</h4>

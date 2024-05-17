@@ -3,7 +3,7 @@ import Cart from '@/models/cart.js';
 
 export const POST = async (req, res) => {
     const { idProd, idCarrito } = await req.json();
-    console.log(idProd, idCarrito);
+
     try {
         // Conectarse a la base de datos
         await connectionToDB();

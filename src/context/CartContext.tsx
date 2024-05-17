@@ -28,12 +28,10 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }: any) => 
     const [cart, setCart] = useState<Product[]>([]);
 
     useEffect(() => {
-        console.log(cart);
         const storedCart = localStorage.getItem('arrCat');
-        console.log(storedCart)
+
         if (storedCart) {
             setCart(JSON.parse(storedCart));
-            console.log(cart);
         }
 
     }, [])

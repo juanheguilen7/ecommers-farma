@@ -57,7 +57,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, user }) => {
       price: item.price,
       cantidad: 1,
       imageUrl: item.imageUrl,
-      category: item.category
+      category: item.category,
+      offer:item.offer,
+      stock:item.stock
     }
     addToCart(productCart);
     Swal.fire({

@@ -1,9 +1,19 @@
 import React from 'react'
+import './cart.scss'
+import CardCart from '../components/CartProduct/CardCart'
+import CartInfo from '../components/CartInfo/CartInfo'
+const CartById = ({ params }: any) => {
 
-const CartById = ({params}:any) => {
-    console.log(params)
   return (
-    <div>CartById</div>
+    <section className='cartContainer'>
+      <div className='cartListProduct'>
+        <CardCart />
+      </div>
+      <div className='cartInfoOrder'>
+        <CartInfo />
+      </div>
+
+    </section>
   )
 }
 

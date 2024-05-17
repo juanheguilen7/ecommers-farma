@@ -1,0 +1,67 @@
+.boxHeader {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    padding: 0 5rem;
+    background-color: #fff;
+
+    .containerLogo {
+        max-width: max-content;
+
+        .boxLogoHeader {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            font-style: oblique;
+
+            h1 {
+                font-size: 20px;
+            }
+        }
+    }
+
+    .navHeader {
+        align-self: center;
+
+        .listHeader {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+
+            .btnHeader {
+                font-size: 15px;
+                font-weight: 500;
+                cursor: pointer
+            }
+
+            .btnHeader:hover {
+                transition: 0.3s;
+                opacity: 0.8;
+                border-bottom: 2px solid black;
+            }
+        }
+    }
+
+    .actionHeader {
+        align-self: center;
+        display: flex;
+        flex-direction: row;
+
+        align-items: center;
+
+        a {
+            display: flex;
+            align-items: center;
+        }
+
+        a:hover {
+            transition: 0.3s;
+            opacity: 0.8;
+
+            img {
+                transform: scale(1.1);
+            }
+
+        }
+    }
+}

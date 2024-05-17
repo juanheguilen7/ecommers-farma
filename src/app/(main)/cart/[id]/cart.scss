@@ -1,0 +1,12 @@
+.cartContainer{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    padding-inline:8rem;
+    column-gap: 4rem;
+
+
+    .cartListProduct{
+        display: flex;
+        flex-direction: column;
+    }
+}

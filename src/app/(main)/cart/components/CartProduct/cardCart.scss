@@ -1,0 +1,109 @@
+.cardContainer {
+    margin-block: 2rem;
+    border-radius: 2px;
+    background: var(--Primary-White, #FEFEFE);
+    box-shadow: 0px 8px 24px -6px rgba(15, 34, 67, 0.16), 0px 1px 3px 0px rgba(15, 34, 67, 0.12), 0px 0px 1px 0px rgba(15, 34, 67, 0.16);
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr;
+    justify-content: space-between;
+    padding-inline: 0.5rem;
+    align-items: center;
+    min-height: 10rem;
+
+    .imageBox {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        .image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .datos {
+
+            .infoText {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                text-align: start;
+                padding-bottom: 1rem;
+
+                p {
+                    margin: 0;
+                    padding-bottom: 0.4rem;
+                }
+
+                span {
+                    color: grey;
+                    font-size: 14px;
+                }
+            }
+
+            .actionProduct {
+                width: 100%;
+                display: flex;
+
+                button {
+                    margin-right: 1rem;
+                    color: #3483fa;
+                    cursor: pointer;
+                    background: transparent;
+                    border: none;
+                }
+            }
+        }
+    }
+
+    .boxAmount {
+        border: 1px solid rgba(0, 0, 0, .1);
+        border-radius: 4px;
+        box-sizing: border-box;
+        display: flex;
+        height: 46px;
+        overflow: hidden;
+        width: 120px;
+        max-height: 32px;
+        align-items: center;
+
+
+
+        button {
+            background: transparent;
+            border: none;
+            width: 100%;
+            height: 100%;
+            font-family: math;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+    }
+
+    .boxDataPrice {
+        display: flex;
+        flex-direction: column;
+
+        .dataPriceOffer {
+            font-size: 14px;
+            color: grey;
+
+            span {
+                padding: 0.3rem;
+            }
+
+            .offer {
+                color: green;
+            }
+
+            .oldPrice {
+                text-decoration: line-through;
+            }
+        }
+
+        .dataPrice {
+            font-size: 20px;
+            font-weight: 500;
+        }
+    }
+}

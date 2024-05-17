@@ -1,21 +1,17 @@
-import AllProducts from "@/components/AllProducts";
-import Advertisements from "@/components/Advertisements";
-import NavBar from "@/components/Nav";
-import Offers from "@/components/Offers";
-import BannerSlide from "@/components/banner/BannerSlide";
+import Advertisements from "./components/Advertisements/Advertisements";
+import AllProducts from "./components/AllProducts/AllProducts";
+import NewCard from "./components/NewCard/NewCard";
+import Offers from "./components/Offer/Offers";
+import BannerSlide from "./components/banner/BannerSlide";
 
 
 export default function Home() {
   return (
-    <>
-       <NavBar/>
-       <main>
-        <BannerSlide/>
-        <Advertisements/>
-        <Offers />
-        <AllProducts/>
-       </main>
-    </>
-   
+    <main>
+    
+      <Advertisements />
+      <Offers />
+      <AllProducts />
+    </main>
   );
 }

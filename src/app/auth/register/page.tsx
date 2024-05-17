@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import '../../../styles/registerForm.scss';
+import './registerForm.scss';
 
 const initialFormData = {
   name: '',

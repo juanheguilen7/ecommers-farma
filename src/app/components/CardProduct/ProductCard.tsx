@@ -28,12 +28,6 @@ interface Cart {
 }
 
 
-
-
-interface DataUser {
-  cart?: Cart;
-}
-
 const ProductCard: React.FC<ProductCardProps> = ({ products, user }) => {
 
   const [dataUser, setDataUser] = useState<DataUser | undefined>();
@@ -60,7 +54,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, user }) => {
       price: item.price,
       cantidad: 1,
       imageUrl: item.imageUrl,
-      category: item.category
+      category: item.category,
+      offer:item.offer,
+      stock:item.stock
+
     }
     addToCart(productCart);
     Swal.fire({

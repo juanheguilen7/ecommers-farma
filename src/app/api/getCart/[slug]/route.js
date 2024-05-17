@@ -6,12 +6,7 @@ export async function GET(request, { params }) {
     try {
         await connectionToDB();
 
-        console.log(slug,'estoy en el get')
-
         const cart = await Cart.findById(slug);
-        console.log(cart);
-
-
         return new Response({ status: 200 });
 
     } catch (error) {

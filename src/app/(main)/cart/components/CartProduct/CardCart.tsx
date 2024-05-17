@@ -47,12 +47,13 @@ const CardCart = () => {
   return (
     <>
       {product ?
-        product?.map((product: any) => {
+        product?.map((product: any, index:number) => {
           const productAmount = quantities[product.id] || 1;
-          return (<div className='cardContainer'>
+          return (
+          <div className='cardContainer' key={index}>
             <div className='imageBox'>
               <div className='image'>
-                <Image src={product.imageUrl} alt='imgProduct' width={65} height={65} />
+                <Image src={product.image} alt='imgProduct' width={65} height={65} />
               </div>
               <div className='datos'>
                 <div className='infoText'>

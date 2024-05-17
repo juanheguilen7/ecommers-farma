@@ -32,8 +32,6 @@ const Register = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    console.log(formData);
-
     if (formData.password !== formData.confirm_password) {
       setErrors({
         passwordMismatch: true

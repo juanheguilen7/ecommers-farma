@@ -27,9 +27,6 @@ interface Cart {
   cart: string;
 }
 
-interface DataUser {
-  cart?: Cart;
-}
 
 const ProductCard: React.FC<ProductCardProps> = ({ products, user }) => {
 
@@ -60,6 +57,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, user }) => {
       category: item.category,
       offer:item.offer,
       stock:item.stock
+
     }
     addToCart(productCart);
     Swal.fire({

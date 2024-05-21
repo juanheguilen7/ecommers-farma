@@ -1,8 +1,14 @@
-import { connectionToDB } from '@/utils/database.js';
-import Product from '@/models/product.js';
+import { connectionToDB } from '@/utils/database';
+import Product from '@/models/product';
+import { NextRequest, NextResponse } from 'next/server';
+
+interface Params {
+    slug: string;
+}
+
 
 //crea producto
-export const POST = async (req, res, { params }) => {
+export const POST = async (req: NextRequest, res: NextResponse, { params }: { params: Params }) => {
     const { product } = await req.json();
     const { slug } = params;
 
@@ -17,7 +23,7 @@ export const POST = async (req, res, { params }) => {
 
     } catch (error) {
         console.log(error)
-        return new Response({ status: 500 });
+        return new Response('Error a la hora de mostrar todos los productos', { status: 500 });
     }
 };
 
@@ -32,7 +38,7 @@ export const PATCH = async () => {
     }
 };
 
-export async function GET(request, { params }) {
+export async function GET(request: NextRequest, { params }: { params: Params }) {
     try {
         const { slug } = params;
 

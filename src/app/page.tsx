@@ -8,7 +8,6 @@ import BannerSlide from "./components/banner/BannerSlide";
 export default function Home() {
   return (
     <main>
-    
       <Advertisements />
       <Offers />
       <AllProducts />

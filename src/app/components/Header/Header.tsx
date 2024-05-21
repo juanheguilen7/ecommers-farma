@@ -48,7 +48,7 @@ const Header = async () => {
 
                     <Button>
                         <Link href={session && session.user.rol !== 'admin' ? `/cart/${session.user.cart}` : '/auth/login'}>
-                            <CartIcon/>
+                            <CartIcon />
                         </Link>
                     </Button>
                     {session ?
@@ -67,4 +67,4 @@ const Header = async () => {
     )
 }
 
-export default Header
+export default Header;

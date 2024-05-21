@@ -1,8 +1,8 @@
 import { NextMiddleware, NextResponse } from "next/server";
 
-export type MiddlewareFactory = (middleware: any) => NextMiddleware;
+export type MiddlewareFactory = (middleware: NextMiddleware) => NextMiddleware;
 
-export function stackMiddlewares(functions: any[] = [], index = 0): any {
+export function stackMiddlewares(functions: MiddlewareFactory[] = [], index = 0): NextMiddleware {
     const current = functions[index];
     if (current) {
         const next = stackMiddlewares(functions, index + 1);

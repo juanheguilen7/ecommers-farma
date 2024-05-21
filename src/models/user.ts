@@ -1,6 +1,15 @@
 import { Schema, model, models } from "mongoose";
 
-const UserSchema = new Schema({
+interface PropsSchemaUser {
+    username: String;
+    lastname: String;
+    password: String;
+    email: String;
+    rol?: String;
+    cart?: Schema.Types.ObjectId;
+}
+
+const UserSchema = new Schema<PropsSchemaUser>({
     username: {
         type: String,
         required: true
@@ -18,7 +27,7 @@ const UserSchema = new Schema({
         required: [true, 'Password is required.'],
         trim: true,
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Debe indicar un email válido'],
-        unique: [true, 'Email already exists!'],
+        unique: true
     },
     rol: {
         type: String,
@@ -30,6 +39,6 @@ const UserSchema = new Schema({
 
 })
 
-const User = models.User || model("User", UserSchema);
+const User = models.User || model<PropsSchemaUser>("User", UserSchema);
 
 export default User;

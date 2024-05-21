@@ -1,7 +1,8 @@
-import { connectionToDB } from '@/utils/database.js';
-import Cart from '@/models/cart.js';
+import { connectionToDB } from '@/utils/database';
+import Cart from '@/models/cart';
+import { NextRequest, NextResponse } from 'next/server';
 
-export const POST = async (req, res) => {
+export const POST = async (req: NextRequest, res: NextResponse) => {
     const { idProd, idCarrito } = await req.json();
 
     try {
@@ -12,7 +13,7 @@ export const POST = async (req, res) => {
         const carrito = await Cart.findById(idCarrito);
 
         if (!carrito) {
-            return res.status(404).json({ error: 'El carrito no fue encontrado' });
+            return new Response('Cart not founded', { status: 400 });
         }
 
         // Agregar el ID del producto al array de productos del carrito
@@ -22,10 +23,10 @@ export const POST = async (req, res) => {
         await carrito.save();
 
         // Respuesta exitosa
-        return new Response({ message: 'El producto fue agregado al carrito correctamente' }, { status: 200 });
+        return new Response('El producto fue agregado al carrito correctamente', { status: 200 });
     } catch (error) {
-        console.log(error);
-        return new Response({ error: 'Ocurrió un error al procesar la solicitud' }, { status: 500 });
+        console.error(error);
+        return new Response('Ocurrió un error al procesar la solicitud', { status: 500 });
     }
 };
 

@@ -19,6 +19,7 @@ interface Product {
   price: number;
   offer?: number;
   _id: string;
+  __v:number;
 }
 
 interface Cart {

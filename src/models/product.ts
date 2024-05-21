@@ -1,6 +1,15 @@
 import { Schema, model, models } from 'mongoose';
 
-const ProductSchema = new Schema({
+interface PropsProductSchema {
+    name: string;
+    price: number;
+    stock: number;
+    description: string;
+    image: string;
+    offer: number;
+    category: string;
+}
+const ProductSchema = new Schema<PropsProductSchema>({
     name: {
         type: String,
         required: true
@@ -29,6 +38,6 @@ const ProductSchema = new Schema({
     }
 })
 
-const Product = models.Product || model('Product', ProductSchema);
+const Product = models.Product || model<PropsProductSchema>('Product', ProductSchema);
 
 export default Product;

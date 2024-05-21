@@ -2,14 +2,14 @@
 import React, { ReactNode, useState, createContext, useEffect } from "react";
 
 interface Product {
-    id: number;
+    id: string;
     name: string;
     price: number;
     offer: number;
     cantidad: number;
-    imageUrl: string;
+    image: string;
     category: string;
-    stock:number;
+    stock: number;
 }
 
 interface CartContextType {
@@ -24,7 +24,7 @@ interface CartProviderProps {
     children: ReactNode;
 }
 
-export const CartProvider: React.FC<CartProviderProps> = ({ children }: any) => {
+export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     const [cart, setCart] = useState<Product[]>([]);
 
     useEffect(() => {
@@ -38,21 +38,22 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }: any) => 
 
 
     const addToCart = (product: Product) => {
-        setCart((prevCart): any => {
+        setCart((prevCart) => {
             const updatedCart = [...prevCart, product];
             localStorage.setItem('arrCat', JSON.stringify(updatedCart)); //tengo que hacerlo JSON
             return updatedCart
         }) //dentro de la funcion del use estate cargo a local storage, y a su vez retorno el arr de los productos;
     }
 
-    const removeFromCart = (id: any) => {
-        setCart((prevCart): any => {
+    const removeFromCart = (id: string) => {
+        setCart((prevCart): Product[] => {
+            console.log(prevCart, 'prevcart')
             const updatedCart = prevCart.filter(product => product.id !== id)// me va a retornar otro arr pero exceptuando ese producto
             localStorage.setItem('arrCat', JSON.stringify(updatedCart))
             return updatedCart;
         })
     }
-    
+
     return (
         <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
             {children}

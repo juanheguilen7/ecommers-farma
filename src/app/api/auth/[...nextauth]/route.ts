@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 import User from "@/models/user";
-import { connectionToDB } from '@/utils/database.js';
+import { connectionToDB } from '@/utils/database';
 
 import bcrypt from 'bcrypt';
 import { cookies } from "next/headers.js";

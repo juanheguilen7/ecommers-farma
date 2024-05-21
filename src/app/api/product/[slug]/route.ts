@@ -6,28 +6,6 @@ interface Params {
     slug: string;
 }
 
-
-//crea producto
-export const POST = async (req: NextRequest, res: NextResponse, { params }: { params: Params }) => {
-    const { product } = await req.json();
-    const { slug } = params;
-
-    try {
-        await connectionToDB()
-        if (slug === '') {
-            const newProduct = new Product(product);
-            await newProduct.save();
-
-            return new Response(JSON.stringify(newProduct), { status: 200 });
-        }
-
-    } catch (error) {
-        console.log(error)
-        return new Response('Error a la hora de mostrar todos los productos', { status: 500 });
-    }
-};
-
-
 //modificar producto
 export const PATCH = async () => {
 
@@ -63,34 +41,16 @@ export async function GET(request: NextRequest, { params }: { params: Params }) 
     }
 }
 
-
-/* 
-//llamar producto por ID
-export const GET = async (req, res) => {
-    console.log(params)
-    try {
-        await connectionToDB();
-        const productById = await Product.findById(id);
-        console.log(productById);
-        return res.status(200).json(productById);
-    } catch (error) {
-        console.log(error);
-        return new Response({ status: 500 })
-    }
-};
-
 //eliminar producto
-export const DELETE = async (req, res) => {
+export const DELETE = async (req: NextRequest, res: NextResponse) => {
 
     try {
         await connectionToDB();
-        const deletProduct = await Product.findByIdAndDelete(productId);
 
         return new Response('El producto fue eliminado de forma exitosa', { status: 200 })
     } catch (error) {
         console.log(error);
-        return new Response({ status: 500 })
+        return new Response('', { status: 500 })
 
     }
 };
- */

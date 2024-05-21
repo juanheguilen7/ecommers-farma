@@ -21,7 +21,7 @@ type Product = {
 const Offers = () => {
     const [arrProduct, setArrProduct] = useState<Product[]>([]);
 
-    const { data: session, status }: any = useSession();
+    const { data: session }: any = useSession();
 
     let userData = {}
 

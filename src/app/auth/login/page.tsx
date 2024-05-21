@@ -76,7 +76,7 @@ const Login = () => {
           </div>
           <div className='box-link'>
             <span>¿No tienes cuenta?</span>
-            <Link href={'/register'}>
+            <Link href={'/auth/register'}>
               registrarse
             </Link>
           </div>

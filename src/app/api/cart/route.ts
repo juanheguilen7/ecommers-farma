@@ -1,10 +1,12 @@
 import { connectionToDB } from '@/utils/database';
 import Cart from '@/models/cart';
 import { NextRequest, NextResponse } from 'next/server';
+import { stat } from 'fs';
+
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
-    const { idProd, idCarrito } = await req.json();
-
+    const { idProd, idCarrito, status } = await req.json();
+    console.log(idProd, idCarrito, status)
     try {
         // Conectarse a la base de datos
         await connectionToDB();
@@ -16,9 +18,17 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
             return new Response('Cart not founded', { status: 400 });
         }
 
-        // Agregar el ID del producto al array de productos del carrito
-        carrito.products.push(idProd);
+        switch (status) {
+            case true:
+                // Agregar el ID del producto al array de productos del carrito
+                carrito.products.push(idProd);
+                break;
 
+            case false:
+                // Eliminar el ID del producto del array de productos del carrito
+                carrito.products.pull(idProd);
+                break;
+        }
         // Guardar los cambios en la base de datos
         await carrito.save();
 

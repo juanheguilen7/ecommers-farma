@@ -5,14 +5,26 @@ import ProductCard from '../CardProduct/ProductCard';
 import './offers.scss'
 import Watch from './Timer/Timer';
 import { useSession } from 'next-auth/react';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+
+type Product = {
+    category: string;
+    description: string;
+    image: string;
+    name: string;
+    offer: number;
+    price: number;
+    stock: number;
+    __v: number;
+    _id: string;
+}
 
 const Offers = () => {
-    const [arrProduct, setArrProduct] = useState<any[]>([]);
+    const [arrProduct, setArrProduct] = useState<Product[]>([]);
 
-    const { data: session, status }: any = useSession()
+    const { data: session }: any = useSession();
+
     let userData = {}
-    
+
     if (session?.user) {
         userData = {
             id: session.user.id,
@@ -27,6 +39,7 @@ const Offers = () => {
                 const slug = 'offer';
                 const res = await fetch(`/api/product/${slug}`, { method: 'GET' });
                 const dataProduct = await res.json();
+
                 setArrProduct(dataProduct.arrProductFilter);
             } catch (error) {
                 console.error(error);

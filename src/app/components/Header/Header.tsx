@@ -45,26 +45,24 @@ const Header = async () => {
                     </ul>
                 </nav>
                 <div className='actionHeader'>
-
-                    <Button>
-                        <Link href={session && session.user.rol !== 'admin' ? `/cart/${session.user.cart}` : '/auth/login'}>
-                            <CartIcon/>
-                        </Link>
-                    </Button>
+                    <Link href={session && session.user.rol !== 'admin' ? `/cart/${session.user.cart}` : '/auth/login'}>
+                        <Button>
+                            <CartIcon />
+                        </Button>
+                    </Link>
                     {session ?
                         <Action id={session.user.id} rol={session.user.rol} />
                         :
-                        <Button>
-                            <Link href={'/auth/login'}>
+                        <Link href={'/auth/login'}>
+                            <Button>
                                 <Image src={'/icons/user.svg'} width={25} height={25} alt='iconUser' />
-                            </Link>
-                        </Button>
+                            </Button>
+                        </Link>
                     }
-
                 </div>
             </header>
         </>
     )
 }
 
-export default Header
+export default Header;

@@ -28,4 +28,4 @@ const NewCard = () => {
     )
 }
 
-export default NewCard
+export default NewCard;

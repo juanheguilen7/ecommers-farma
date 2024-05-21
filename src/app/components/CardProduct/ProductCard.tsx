@@ -19,17 +19,18 @@ interface Product {
   price: number;
   offer?: number;
   _id: string;
+  __v: number;
 }
-
-interface Cart {
-  id: string;
-  cart: string;
-}
-
 
 const ProductCard: React.FC<ProductCardProps> = ({ products, user }) => {
 
   const [dataUser, setDataUser] = useState<any | undefined>();
+  //un estado de un objeto con clave id y valor true/false
+  const [favorites, setFavorites] = useState<{ [key: string]: boolean }>({});
+  const [arrProd, setArrProd] = useState<string[]>([]);
+
+
+  //contexto de carrito
   const cartContext = useContext(CartContext);
 
   if (!cartContext) {
@@ -37,16 +38,21 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, user }) => {
   }
 
   const { addToCart } = cartContext;
+
+  //user credenciales
   useEffect(() => {
     if (user) {
       setDataUser(user);
     }
   }, [user]);
 
+  //funcion que calcula el precio en base al descuento
   const handleCalculate = (price: number, offer: number) => {
     return price - (price * (offer / 100));
   };
-  const handlePush = (item: any) => {
+
+  const handlePush = (item: Product) => {
+    //creo el dato que quiero mandar al contexto
     const productCart: any = {
       id: item._id,
       name: item.name,
@@ -54,11 +60,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, user }) => {
       cantidad: 1,
       image: item.image,
       category: item.category,
-      offer:item.offer,
-      stock:item.stock
-
+      offer: item.offer,
+      stock: item.stock
     }
+    //uso la funcion del contexto para agregar al carrito
     addToCart(productCart);
+
     Swal.fire({
       position: "bottom-end",
       icon: "success",
@@ -68,35 +75,50 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, user }) => {
       toast: true
     });
   }
-  /*  try {
-     // Realizar la solicitud al servidor para agregar el producto al carrito
-     const response = await fetch('/api/cart', {
-       method: 'POST',
-       headers: {
-         'Content-Type': 'application/json',
-       },
-       body: JSON.stringify({
-         idProd: idProduct,
-         idCarrito: cart,
-       }),
-     });
-     // Manejar la respuesta del servidor
-     if (response.ok) {
-       console.log('Producto agregado al carrito correctamente');
-       // Aquí puedes realizar alguna acción adicional si es necesario
-     } else {
-       console.error('Error al agregar el producto al carrito:', response.statusText);
-       // Aquí puedes manejar el error de alguna manera apropiada
-     }
-   } catch (error) {
-     console.error('Error al agregar el producto al carrito:');
-     // Manejar errores de red u otros errores no controlados
-   } */
-  return (
+  const handlePath = (id: string) => {
+    const pathProduct = `http://localhost:3000/product/${id}`;
 
-    
+    //para copiar el path;
+    navigator.clipboard.writeText(pathProduct).then(() => {
+      Swal.fire({
+        position: "bottom-end",
+        icon: "info",
+        text: 'URL del producto copiada.',
+        showConfirmButton: false,
+        timer: 1500,
+        toast: true
+      });
+    });
+
+
+  }
+
+  const handlePushFav = async (id: string) => {
+    const newFavorites = { ...favorites, [id]: !favorites[id] };
+    setFavorites(newFavorites);
+
+
+
+    const sendData = {
+      idProd: id,
+      idCarrito: dataUser.cart,
+      status: !favorites[id]
+    }
+    console.log(sendData);
+    const response = await fetch('/api/cart', {
+      method: 'POST', body: JSON.stringify(
+        sendData
+      )
+    })
+
+
+  };
+
+
+  return (
     <>
       {products && products.length !== 0 ? products.map((item, index) => {
+        //constante que calcula el dato
         const priceOffer = item.offer && item.offer !== 0 ? handleCalculate(item.price, item.offer) : null;
 
         return (
@@ -135,11 +157,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, user }) => {
               }
               <div className='productAction'>
                 {/* btn que agrega a favoritos este si deberia conectar a la BD*/}
-                <button>
-                  <Image src={'/icons/heart.svg'} alt='iconHeart' width={20} height={20} />
-                </button>
+                {dataUser.cart && favorites[item._id] ?
+                  <button onClick={() => { handlePushFav(item._id) }}>
+                    <Image src={'/icons/heart-filled.svg'} alt='iconHeart' width={20} height={20} />
+                  </button>
+                  :
+                  <button onClick={() => { handlePushFav(item._id) }}>
+                    <Image src={'/icons/heart.svg'} alt='iconHeart' width={20} height={20} />
+                  </button>
+                }
+
                 {/* btn que copia el link del producto */}
-                <button>
+                <button onClick={() => { handlePath(item._id) }}>
                   <Image src={'/icons/copi.svg'} alt='iconCopie' width={20} height={20} />
                 </button>
                 {/* btn que agrega al cart lo que hace conecta el contexto*/}

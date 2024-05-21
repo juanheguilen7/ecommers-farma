@@ -3,7 +3,6 @@ import './slider.scss'
 import Carousel from '../../Carrousel/Carousel'
 
 const SliderComponent = () => {
-
   const arrText = [
     { text: 'Paga con Visa, Mastercard y Cabal' },
     { text: 'Envio a domicilio' },
@@ -11,7 +10,6 @@ const SliderComponent = () => {
     { text: 'Consulta sobre tu producto' }
 
   ]
-
   return (
     <section className='slider-container'>
       <Carousel items={arrText} autoSlide={true} />

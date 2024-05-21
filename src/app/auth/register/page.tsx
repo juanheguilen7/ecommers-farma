@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import './registerForm.scss';
 
@@ -21,7 +21,7 @@ const Register = () => {
   });
 
   //funcion que cada vez que cambia el valor actualiza el estado, de los valores 
-  const handleChange = (e: any) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -29,7 +29,7 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (formData.password !== formData.confirm_password) {

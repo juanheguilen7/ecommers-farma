@@ -1,10 +1,11 @@
-import { connectionToDB } from '@/utils/database.js';
-import User from '@/models/user.js';
-import Cart from '@/models/cart.js';
+import { connectionToDB } from '@/utils/database';
+import User from '@/models/user';
+import Cart from '@/models/cart';
 
 import bcrypt from 'bcrypt';
+import { NextRequest, NextResponse } from 'next/server';
 
-export const POST = async (req, res) => {
+export const POST = async (req: NextRequest, res: NextResponse) => {
     const { user } = await req.json();
 
     try {
@@ -37,7 +38,7 @@ export const POST = async (req, res) => {
         await newUser.save();
 
         //RETURN CREATED 201
-        return new Response(JSON.stringify(newUser), { satatus: 201 })
+        return new Response(JSON.stringify(newUser), { status: 201 })
 
     } catch (error) {
         console.log(error)

@@ -15,7 +15,8 @@ interface Product {
 interface CartContextType {
     cart: Product[];
     addToCart: (product: Product) => void;
-    removeFromCart: (id: any) => void;
+    removeFromCart: (id: number) => void;
+    updateQuantity: (id: number, cantidad: number) => void;
 }
 
 export const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -24,18 +25,53 @@ interface CartProviderProps {
     children: ReactNode;
 }
 
-export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
+
+export const CartProvider: React.FC<CartProviderProps> = ({ children }: CartProviderProps) => {
+
     const [cart, setCart] = useState<Product[]>([]);
 
     useEffect(() => {
         const storedCart = localStorage.getItem('arrCat');
-
         if (storedCart) {
             setCart(JSON.parse(storedCart));
         }
+    }, []);
 
-    }, [])
+    const addToCart = (product: Product) => {
+        setCart((prevCart) => {
+            const productIndex = prevCart.findIndex(p => p.id === product.id);
+            let updatedCart;
+            if (productIndex !== -1) {
+                // Producto ya está en el carrito, aumentar cantidad
+                updatedCart = prevCart.map((p, index) =>
+                    index === productIndex ? { ...p, cantidad: p.cantidad + 1 } : p
+                );
+            } else {
+                // Producto no está en el carrito, agregar al carrito
+                updatedCart = [...prevCart, { ...product, cantidad: 1 }];
+            }
+            localStorage.setItem('arrCat', JSON.stringify(updatedCart));
+            return updatedCart;
+        });
+    };
 
+    const removeFromCart = (id: number) => {
+        setCart((prevCart) => {
+            const updatedCart = prevCart.filter(product => product.id !== id);
+            localStorage.setItem('arrCat', JSON.stringify(updatedCart));
+            return updatedCart;
+        });
+    };
+
+    const updateQuantity = (id: number, cantidad: number) => {
+        setCart((prevCart) => {
+            const updatedCart = prevCart.map(product => 
+                product.id === id ? { ...product, cantidad } : product
+            );
+            localStorage.setItem('arrCat', JSON.stringify(updatedCart));
+            return updatedCart;
+        });
+    };
 
     const addToCart = (product: Product) => {
         setCart((prevCart) => {
@@ -54,9 +90,10 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         })
     }
 
+
     return (
-        <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+        <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity }}>
             {children}
         </CartContext.Provider>
-    )
-}
+    );
+};

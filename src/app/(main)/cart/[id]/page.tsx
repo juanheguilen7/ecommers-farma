@@ -6,12 +6,17 @@ const CartById = ({ params }: any) => {
 
   return (
     <section className='cartContainer'>
-      <div className='cartListProduct'>
-        <CardCart />
-      </div>
-      <div className='cartInfoOrder'>
-        <CartInfo />
-      </div>
+      {
+        <>
+          <div className='cartListProduct'>
+            <CardCart />
+          </div>
+          <div className='cartInfoOrder'>
+            <CartInfo />
+          </div>
+        </>
+
+      }
 
     </section>
   )

@@ -55,15 +55,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }: CartProv
         });
     };
 
-    const removeFromCart = (id: number) => {
-        setCart((prevCart) => {
-            const updatedCart = prevCart.filter(product => product.id !== id);
-            localStorage.setItem('arrCat', JSON.stringify(updatedCart));
-            return updatedCart;
-        });
-    };
-
-    const updateQuantity = (id: number, cantidad: number) => {
+    const updateQuantity = (id: any, cantidad: number) => {
         setCart((prevCart) => {
             const updatedCart = prevCart.map(product => 
                 product.id === id ? { ...product, cantidad } : product
@@ -73,15 +65,8 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }: CartProv
         });
     };
 
-    const addToCart = (product: Product) => {
-        setCart((prevCart) => {
-            const updatedCart = [...prevCart, product];
-            localStorage.setItem('arrCat', JSON.stringify(updatedCart)); //tengo que hacerlo JSON
-            return updatedCart
-        }) //dentro de la funcion del use estate cargo a local storage, y a su vez retorno el arr de los productos;
-    }
 
-    const removeFromCart = (id: string) => {
+    const removeFromCart = (id: any) => {
         setCart((prevCart): Product[] => {
             console.log(prevCart, 'prevcart')
             const updatedCart = prevCart.filter(product => product.id !== id)// me va a retornar otro arr pero exceptuando ese producto

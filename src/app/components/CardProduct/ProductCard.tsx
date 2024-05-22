@@ -27,7 +27,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, user }) => {
   const [dataUser, setDataUser] = useState<any | undefined>();
   //un estado de un objeto con clave id y valor true/false
   const [favorites, setFavorites] = useState<{ [key: string]: boolean }>({});
-  const [arrProd, setArrProd] = useState<string[]>([]);
 
 
   //contexto de carrito
@@ -42,6 +41,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, user }) => {
   //user credenciales
   useEffect(() => {
     if (user) {
+      console.log(user)
       setDataUser(user);
     }
   }, [user]);
@@ -96,22 +96,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, user }) => {
   const handlePushFav = async (id: string) => {
     const newFavorites = { ...favorites, [id]: !favorites[id] };
     setFavorites(newFavorites);
-
-
-
     const sendData = {
       idProd: id,
-      idCarrito: dataUser.cart,
+      idBookmark: dataUser.bookmark,
       status: !favorites[id]
     }
-    console.log(sendData);
-    const response = await fetch('/api/cart', {
+    const response = await fetch('/api/bookmark', {
       method: 'POST', body: JSON.stringify(
         sendData
       )
     })
-
-
   };
 
 

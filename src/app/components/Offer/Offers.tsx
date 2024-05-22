@@ -28,7 +28,8 @@ const Offers = () => {
     if (session?.user) {
         userData = {
             id: session.user.id,
-            cart: session.user.cart
+            cart: session.user.cart,
+            bookmark: session.user.bookmark
         }
     }
 

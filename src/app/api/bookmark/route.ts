@@ -1,36 +1,36 @@
-import { connectionToDB } from '@/utils/database';
-import Cart from '@/models/cart';
-import { NextRequest, NextResponse } from 'next/server';
-import { stat } from 'fs';
+import { connectionToDB } from "@/utils/database";
+import { NextRequest, NextResponse } from "next/server";
+import Bookmark from "@/models/bookmark";
 
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
-    const { idProd, idCarrito, status } = await req.json();
-    console.log(idProd, idCarrito, status)
+    const { idProd, idBookmark, status } = await req.json();
+
+    console.log(idProd, idBookmark, status)
     try {
         // Conectarse a la base de datos
         await connectionToDB();
 
         // Encontrar el carrito asociado por su ID
-        const carrito = await Cart.findById(idCarrito);
+        const bookmark = await Bookmark.findById(idBookmark);
 
-        if (!carrito) {
+        if (!bookmark) {
             return new Response('Cart not founded', { status: 400 });
         }
 
         switch (status) {
             case true:
                 // Agregar el ID del producto al array de productos del carrito
-                carrito.products.push(idProd);
+                bookmark.products.push(idProd);
                 break;
 
             case false:
                 // Eliminar el ID del producto del array de productos del carrito
-                carrito.products.pull(idProd);
+                bookmark.products.pull(idProd);
                 break;
         }
         // Guardar los cambios en la base de datos
-        await carrito.save();
+        await bookmark.save();
 
         // Respuesta exitosa
         return new Response('El producto fue agregado al carrito correctamente', { status: 200 });
@@ -39,4 +39,3 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
         return new Response('Ocurrió un error al procesar la solicitud', { status: 500 });
     }
 };
-

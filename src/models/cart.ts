@@ -1,8 +1,16 @@
 import { Schema, models, model } from "mongoose";
 
-interface PropsCartSchema{
-    user:Schema.Types.ObjectId;
-    products:Schema.Types.ObjectId[];
+interface PropsCartSchema {
+    user: Schema.Types.ObjectId;
+    products: Product[];
+    total: number;
+    order: string;
+}
+
+type Product = {
+    id: Schema.Types.ObjectId;
+    quantity: number;
+    price: number;
 }
 
 const CartSchema = new Schema<PropsCartSchema>({
@@ -13,8 +21,14 @@ const CartSchema = new Schema<PropsCartSchema>({
     },
     products: [{
         type: Schema.Types.ObjectId,
-        ref: 'Product'
-    }]
+        ref: 'Product',
+    }],
+    total: {
+        type: Number,
+    },
+    order: {
+        type: String,
+    }
 });
 
 const Cart = models.Cart || model<PropsCartSchema>('Cart', CartSchema);

@@ -101,7 +101,7 @@ const Action = ({ id, rol }: any) => {
                                         </Link>
                                     </MenuItem>
                                     <MenuItem onClick={handleClose}>
-                                        <Link href={'/'}>Me gusta</Link>
+                                        <Link href={'/bookmark'}>Me gusta</Link>
                                     </MenuItem>
                                     {rol === 'admin' ?
                                         <MenuItem onClick={handleClose}>

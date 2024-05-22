@@ -34,7 +34,8 @@ export const authOptions: any = {
                     email: userFound.email,
                     cart: userFound.cart,
                     id: userFound._id,
-                    rol: userFound.rol
+                    rol: userFound.rol,
+                    bookmark: userFound.bookmark
                 }
 
             }
@@ -44,21 +45,23 @@ export const authOptions: any = {
         signIn: "auth/login",
     },
     callbacks: {
-        async jwt({ token, user, account, profile, isNewUser }: any) {
+        async jwt({ token, user }: any) {
             if (user) {
                 token.id = user._id,
                     token.cart = user.cart,
                     token.rol = user.rol,
                     token.id = user.id,
                     token.rol = user.rol
+                token.bookmark = user.bookmark
             }
             return token;
         },
-        async session({ session, token, user }: any) {
+        async session({ session, token }: any) {
             // Send properties to the client, like an access_token and user id from a provider.
             session.user.id = token.id
             session.user.cart = token.cart
             session.user.rol = token.rol
+            session.user.bookmark = token.bookmark
 
             return session
         }

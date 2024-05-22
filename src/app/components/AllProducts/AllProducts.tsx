@@ -7,13 +7,16 @@ import { useSession } from 'next-auth/react';
 const AllProducts = () => {
     const [arrProduct, setArrProduct] = useState<any[]>([]);
 
-    const { data: session, status }: any = useSession()
+    const { data: session }: any = useSession()
     let userData = {}
+
+    console.log(session);
 
     if (session?.user) {
         userData = {
             id: session.user.id,
-            cart: session.user.cart
+            cart: session.user.cart,
+            bookmark: session.user.bookmark
         }
     }
     // Paso 1: Cargar los productos

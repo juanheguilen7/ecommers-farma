@@ -7,6 +7,7 @@ interface PropsSchemaUser {
     email: String;
     rol?: String;
     cart?: Schema.Types.ObjectId;
+    bookmark?: Schema.Types.ObjectId;
 }
 
 const UserSchema = new Schema<PropsSchemaUser>({
@@ -36,6 +37,10 @@ const UserSchema = new Schema<PropsSchemaUser>({
         type: Schema.Types.ObjectId,
         ref: 'Cart'
     },
+    bookmark: {
+        type: Schema.Types.ObjectId,
+        ref: 'Bookmark'
+    }
 
 })
 

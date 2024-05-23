@@ -21,18 +21,18 @@ export async function GET(request: NextRequest, { params }: { params: Params }) 
         const { slug } = params;
 
         await connectionToDB();
-        const arrProduct = await Product.find();
+        const products = await Product.find();
 
         switch (slug) {
             case 'offer':
-                const arrProductFilter = arrProduct.filter((product) => {
+                const arrProduct = products.filter((product) => {
                     if (product.offer !== 0) {
                         return product
                     }
                 })
-                return new Response(JSON.stringify({ arrProductFilter }), { status: 200 });
-            case 'all':
                 return new Response(JSON.stringify({ arrProduct }), { status: 200 });
+            case 'all':
+                return new Response(JSON.stringify({ products }), { status: 200 });
         }
 
     } catch (error) {

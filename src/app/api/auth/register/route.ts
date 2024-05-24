@@ -4,6 +4,7 @@ import Cart from '@/models/cart';
 
 import bcrypt from 'bcrypt';
 import { NextRequest, NextResponse } from 'next/server';
+import Bookmark from '@/models/bookmark';
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
     const { user } = await req.json();
@@ -29,18 +30,25 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
 
         await newUser.save();
 
-        //CREAT CART FOR USER
+        //CREATE CART 
         const newCart = new Cart({ user: newUser._id });
         await newCart.save();
 
+        //CREATE BOOKMARK
+        const newBookmark = new Bookmark({ user: newUser._id });
+        await newBookmark.save();
+
         //SAVE _ID CART FOR USER
         newUser.cart = newCart._id;
-        await newUser.save();
+        newUser.bookmark = newBookmark._id;
 
+        await newUser.save();
         //RETURN CREATED 201
         return new Response(JSON.stringify(newUser), { status: 201 })
 
     } catch (error) {
         console.log(error)
+        return new Response('Error to create new user', { status: 500 })
+
     }
 }

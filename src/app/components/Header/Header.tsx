@@ -16,7 +16,8 @@ type userSession = {
         image: string;
         id: string;
         cart: string;
-        rol: string
+        rol: string;
+        bookmark:string;
     }
 }
 const Header = async () => {

@@ -40,6 +40,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ url, method }) => {
       const user = session.user;
       setDataUser(user);
 
+      // Fetch user's bookmarks
+      const fetchBookmarks = async () => {
+        try {
+          const response = await fetch(`/api/bookmark/${user.bookmark}`); // Adjusted URL to use user.bookmark (bookmarkId)
+          const data = await response.json();
+          console.log(data)
+          const favoriteProducts = data.products.reduce((acc: any, product: any) => {
+            acc[product._id] = true;
+            return acc;
+          }, {});
+          setFavorites(favoriteProducts);
+        } catch (error) {
+          console.error('Error fetching bookmarks:', error);
+        }
+      };
+
+      fetchBookmarks();
     } else {
       setDataUser(undefined);
     }
@@ -94,7 +111,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ url, method }) => {
                 <div className='productAction'>
                   <FavoriteButton id={item._id} isFavorite={favorites[item._id]} userBookmarkId={dataUser?.bookmark} />
                   <CopyLinkButton id={item._id} />
-                  {dataUser ? <AddToCartButton item={item} />:null}
+                  {dataUser ? <AddToCartButton item={item} /> : null}
                 </div>
               </div>
             </div>

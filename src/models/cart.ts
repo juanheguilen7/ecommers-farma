@@ -3,7 +3,7 @@ import { Schema, models, model } from "mongoose";
 interface PropsCartSchema {
     user: Schema.Types.ObjectId;
     products: Product[];
-    total: number;
+    totalOrder: number;
     order: string;
 }
 
@@ -13,6 +13,7 @@ type Product = {
     price: number;
 }
 
+// Definir el esquema del carrito
 const CartSchema = new Schema<PropsCartSchema>({
     user: {
         type: Schema.Types.ObjectId,
@@ -20,14 +21,28 @@ const CartSchema = new Schema<PropsCartSchema>({
         required: true // Asegura que el ID del usuario sea requerido al crear el carrito
     },
     products: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Product',
+        id: {
+            type: Schema.Types.ObjectId,
+            ref: 'Product',
+            required: true // Asegura que el ID del producto sea requerido
+        },
+        quantity: {
+            type: Number,
+            required: true // Asegura que la cantidad sea requerida
+        },
+        price: {
+            type: Number,
+            required: true // Asegura que el precio sea requerido
+        }
     }],
-    total: {
+    totalOrder: {
         type: Number,
+        required: true // Asegura que el total del pedido sea requerido
     },
     order: {
         type: String,
+        unique: true, // Asegura que el número de orden sea único
+        required: true // Asegura que el número de orden sea requerido
     }
 });
 

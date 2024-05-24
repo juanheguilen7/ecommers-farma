@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductCard from '../CardProduct/ProductCard';
 import './allProduct.scss';
+import Filter from './filter/Filter';
 
 const AllProducts = () => {
   
@@ -10,6 +11,7 @@ const AllProducts = () => {
             <div>
                 <h2>Todos los productos</h2>
             </div>
+            <Filter/>
             <div className='box-products'>
                 <ProductCard method={'GET'} url={URL} />
             </div>

@@ -11,6 +11,7 @@ const Offers = () => {
             <div>
                 <h2>Ofertas del mes</h2>
             </div>
+            
             <div className='offerContainer'>
                 <Watch />
                 <div className='offerBox'>

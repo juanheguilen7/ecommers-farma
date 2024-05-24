@@ -1,16 +1,17 @@
 import { Schema, model, models } from 'mongoose';
 
 interface PropsProductSchema {
-    name: string;
+    title: string;
     price: number;
     stock: number;
     description: string;
     image: string;
     offer: number;
     category: string;
+    favoriteBy: Schema.Types.ObjectId;
 }
 const ProductSchema = new Schema<PropsProductSchema>({
-    name: {
+    title: {
         type: String,
         required: true
     },
@@ -35,7 +36,11 @@ const ProductSchema = new Schema<PropsProductSchema>({
     category: {
         type: String,
         required: [true, 'Category required']
-    }
+    },
+    favoriteBy: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }]
 })
 
 const Product = models.Product || model<PropsProductSchema>('Product', ProductSchema);

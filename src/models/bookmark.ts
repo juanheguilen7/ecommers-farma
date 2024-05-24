@@ -3,6 +3,7 @@ import { Schema, models, model } from "mongoose";
 interface BookmarkProps {
     user: Schema.Types.ObjectId;
     products: Schema.Types.ObjectId[];
+    quantity: number;
 }
 
 const BookmarkSchema = new Schema<BookmarkProps>({
@@ -13,7 +14,7 @@ const BookmarkSchema = new Schema<BookmarkProps>({
     },
     products: [{
         type: Schema.Types.ObjectId,
-        ref: 'Product'
+        ref: 'Product',
     }]
 });
 

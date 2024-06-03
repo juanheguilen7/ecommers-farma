@@ -43,14 +43,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ url, method }) => {
       // Fetch user's bookmarks
       const fetchBookmarks = async () => {
         try {
-          const response = await fetch(`/api/bookmark/${user.bookmark}`); // Adjusted URL to use user.bookmark (bookmarkId)
-          const data = await response.json();
-          console.log(data)
-          const favoriteProducts = data.products.reduce((acc: any, product: any) => {
-            acc[product._id] = true;
-            return acc;
-          }, {});
-          setFavorites(favoriteProducts);
+          if (user) {
+            const response = await fetch(`/api/bookmark/${user.bookmark}`); // Adjusted URL to use user.bookmark (bookmarkId)
+            const data = await response.json();
+            const favoriteProducts = data.products.reduce((acc: any, product: any) => {
+              acc[product._id] = true;
+              return acc;
+            }, {});
+            setFavorites(favoriteProducts);
+          }
+
         } catch (error) {
           console.error('Error fetching bookmarks:', error);
         }

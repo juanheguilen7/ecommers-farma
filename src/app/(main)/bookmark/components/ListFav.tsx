@@ -20,15 +20,18 @@ type products = {
 const ListFav = ({ bookmarkId }: ListProps) => {
     const [renderData, setRenderData] = useState<products[] | undefined>(undefined);
 
-    const URL = `http://localhost:3000/api/bookmark/${bookmarkId}`;
-
     useEffect(() => {
-        const fetchData = async () => {
-            const response = await fetch(URL, { method: 'GET' });
-            const data = await response.json();
-            setRenderData(data.products);
+        if (bookmarkId) {
+            console.log(bookmarkId)
+            const URL = `http://localhost:3000/api/bookmark/${bookmarkId}`;
+            const fetchData = async () => {
+                const response = await fetch(URL, { method: 'GET' });
+                const data = await response.json();
+                setRenderData(data.products);
+            }
+            fetchData();
         }
-        fetchData();
+
 
     }, [])
 
